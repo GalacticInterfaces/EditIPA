@@ -266,3 +266,62 @@ svg {
 #plist-form {
   transition: opacity 1s;
 }
+
+.checkbox+label .label-small {
+  font-size: 0.8em;
+  color: #999;
+  line-height: 1.5em;
+  display: block;
+}
+
+.checkbox {
+  display: none;
+  /* position: relative;*/
+  width: 80%;
+
+}
+
+.checkbox+label {
+  display: inline-block;
+  /*  padding: 10px;*/
+  text-align: left !important;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
+
+}
+
+.checkbox+label span.switch {
+  display: inline-block;
+  width: 46px;
+  height: 27px;
+  float: right;
+  border-radius: 16px;
+  margin-right: 10px;
+  margin-left: 10px;
+  border: 2px solid #39393d;
+  background-color: #39393d;
+  transition: background-color ease 200ms, border-color ease 200ms;
+}
+
+.checkbox+label span.switch:before {
+  content: '';
+  position: absolute;
+  background-color: #fff;
+  margin-top: 0px;
+  margin-left: 0px;
+  height: 27px;
+  width: 27px;
+  border-radius: 15px;
+  transition: margin-left ease 200ms;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.checkbox:checked+label span.switch {
+  background-color: #49d864;
+  border: 2px solid #49d864;
+}
+
+.checkbox:checked+label span:before {
+  margin-left: 19px;
+  background-color: #fff;
+}

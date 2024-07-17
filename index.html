@@ -45,40 +45,43 @@
               </svg>
             </div>
             -->
-            <image id="app-icon"  width="100px" height="100px" src=""  />
-          </div>
-            <div class="form-group">
-              <label for="display-name">Display Name (CFBundleDisplayName)</label>
-              <input type="text" id="display-name" class="form-control" oninvalid="this.setCustomValidity('This field is required.')" oninput="this.setCustomValidity('')" />
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="bundle-identifier">Bundle Identifier (CFBundleIdentifier)</label>
-            <input type="text" id="bundle-identifier" class="form-control" pattern="[a-zA-Z0-9-._]+" required oninvalid="this.setCustomValidity('Only alphanumeric characters, dots, hyphens, and underscores are allowed.')" oninput="this.setCustomValidity('')" />
+            <image id="app-icon" width="100px" height="100px" src="" />
           </div>
           <div class="form-group">
-            <label for="bundle-name">Bundle Name (CFBundleName)</label>
-            <input type="text" id="bundle-name" class="form-control" required oninvalid="this.setCustomValidity('This field is required.')" oninput="this.setCustomValidity('')" />
+            <label for="display-name">Display Name (CFBundleDisplayName)</label>
+            <input type="text" id="display-name" class="form-control" oninvalid="this.setCustomValidity('This field is required.')" oninput="this.setCustomValidity('')" />
           </div>
-
-          <div class="form-group">
-            <label for="bundle-version">Bundle Version (CFBundleVersion)</label>
-            <input type="text" id="bundle-version" class="form-control" pattern="\d+(\.\d+)*" required oninvalid="this.setCustomValidity('Version should be in the format x.x.x where x is a number.')" oninput="this.setCustomValidity('')" />
-          </div>
-          <div class="form-group">
-            <label for="short-version-string">Short Version String (CFBundleShortVersionString)</label>
-            <input type="text" id="short-version-string" class="form-control" pattern="\d+(\.\d+)*" required oninvalid="this.setCustomValidity('Version should be in the format x.x.x where x is a number.')" oninput="this.setCustomValidity('')" />
-          </div>
-          <div class="form-group">
-            <label for="min-ios-version">Minimum iOS Version (MinimumOSVersion)</label>
-            <input type="text" id="min-ios-version" class="form-control" pattern="\d+(\.\d+)*" required oninvalid="this.setCustomValidity('Version should be in the format x.x.x where x is a number.')"
-            onblur="formatVersionInput()"
-            oninput="this.setCustomValidity('');" />
-          </div>
-          <button type="submit" class="btn submitBtn">Submit</button>
         </div>
-      </form>
+
+        <div class="form-group">
+          <label for="bundle-identifier">Bundle Identifier (CFBundleIdentifier)</label>
+          <input type="text" id="bundle-identifier" class="form-control" pattern="[a-zA-Z0-9-._]+" required oninvalid="this.setCustomValidity('Only alphanumeric characters, dots, hyphens, and underscores are allowed.')" oninput="this.setCustomValidity('')" />
+        </div>
+        <div class="form-group">
+          <label for="bundle-name">Bundle Name (CFBundleName)</label>
+          <input type="text" id="bundle-name" class="form-control" required oninvalid="this.setCustomValidity('This field is required.')" oninput="this.setCustomValidity('')" />
+        </div>
+
+        <div class="form-group">
+          <label for="bundle-version">Bundle Version (CFBundleVersion)</label>
+          <input type="text" id="bundle-version" class="form-control" pattern="\d+(\.\d+)*" required oninvalid="this.setCustomValidity('Version should be in the format x.x.x where x is a number.')" oninput="this.setCustomValidity('')" />
+        </div>
+        <div class="form-group">
+          <label for="short-version-string">Short Version String (CFBundleShortVersionString)</label>
+          <input type="text" id="short-version-string" class="form-control" pattern="\d+(\.\d+)*" required oninvalid="this.setCustomValidity('Version should be in the format x.x.x where x is a number.')" oninput="this.setCustomValidity('')" />
+        </div>
+        <div class="form-group">
+          <label for="min-ios-version">Minimum iOS Version (MinimumOSVersion)</label>
+          <input type="text" id="min-ios-version" class="form-control" pattern="\d+(\.\d+)*" required oninvalid="this.setCustomValidity('Version should be in the format x.x.x where x is a number.')" onblur="formatVersionInput()" oninput="this.setCustomValidity('');" />
+        </div>
+        <div class="form-group">
+
+          <input type="checkbox" id="file-access" class="checkbox" name="file-access">
+          <label for="file-access"><span class="switch"></span>Supports Files App<span class="label-small">Enables document access</span></label>
+        </div>
+        <button type="submit" class="btn submitBtn">Submit</button>
+    </div>
+    </form>
     </div>
   </main>
   <script src="build/main.js"></script>

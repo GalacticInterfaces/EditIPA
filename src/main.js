@@ -93,14 +93,17 @@ function startEditor(parsedPlist, zipFile) {
   const bundleVersion = parsedPlist['CFBundleVersion'] || '';
   const shortVersionString = parsedPlist['CFBundleShortVersionString'] || '';
   const minIOSVersion = parsedPlist['MinimumOSVersion'] || '';
-
+  const SupportsDocumentBrowser = parsedPlist['UISupportsDocumentBrowser'] || false
+  const FileSharingEnabled = parsedPlist['UIFileSharingEnabled'] || false
   document.getElementById('bundle-identifier').value = bundleIdentifier;
   document.getElementById('bundle-name').value = bundleName;
   document.getElementById('display-name').value = displayName;
   document.getElementById('bundle-version').value = bundleVersion;
   document.getElementById('short-version-string').value = shortVersionString;
   document.getElementById('min-ios-version').value = minIOSVersion;
-
+  if (SupportsDocumentBrowser && FileSharingEnabled) {
+    document.getElementById('file-access').checked = true;
+  }
 
   const iconName = getMainIconName(parsedPlist);
 
@@ -143,6 +146,7 @@ function clearFormData() {
   document.getElementById('short-version-string').value = '';
   document.getElementById('min-ios-version').value = '';
   document.getElementById('app-icon').src = '';
+  document.getElementById('file-access').checked = false;
 }
 
 function getMainIconName(parsedPlist) {
@@ -171,12 +175,15 @@ document.addEventListener("submit", (event) => {
       editLoader.classList.remove('hidden')
       statusText.classList.remove('hidden')
       statusText.textContent = "Building Plist"
+      const isSupportDocumentBrowserEnabled = document.getElementById('file-access').checked;
       parsedPlistGlobal['CFBundleIdentifier'] = document.getElementById('bundle-identifier').value;
       parsedPlistGlobal['CFBundleName'] = document.getElementById('bundle-name').value;
       parsedPlistGlobal['CFBundleDisplayName'] = document.getElementById('display-name').value;
       parsedPlistGlobal['CFBundleVersion'] = document.getElementById('bundle-version').value;
       parsedPlistGlobal['CFBundleShortVersionString'] = document.getElementById('short-version-string').value;
       parsedPlistGlobal['MinimumOSVersion'] = document.getElementById('min-ios-version').value;
+      parsedPlistGlobal['UISupportsDocumentBrowser'] = isSupportDocumentBrowserEnabled;
+      parsedPlistGlobal['UIFileSharingEnabled'] = isSupportDocumentBrowserEnabled;
 
       const serializedPlist = Plist.serialize(parsedPlistGlobal)
       const payloadFolder = Object.keys(zipFileGlobal.files).find(fileName => fileName.startsWith('Payload/') && fileName.endsWith('.app/Info.plist'));
@@ -184,10 +191,13 @@ document.addEventListener("submit", (event) => {
       if (payloadFolder) {
         zipFileGlobal.file(payloadFolder, serializedPlist);
         statusText.textContent = 'Building Ipa!';
-        zipFileGlobal.generateAsync({ type: 'blob' ,mimeType: "application/octet-stream'",
-  compression: "DEFLATE"})
+        zipFileGlobal.generateAsync({
+            type: 'blob',
+            mimeType: "application/octet-stream'",
+            compression: "DEFLATE"
+          })
           .then(function(content) {
-     // content = new Blob([content], { type: 'application/octet-stream' });
+            // content = new Blob([content], { type: 'application/octet-stream' });
             statusText.textContent = 'Starting download!';
             zipFileGlobal = null
             parsedPlistGlobal = null
