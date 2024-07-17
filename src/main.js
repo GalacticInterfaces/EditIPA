@@ -101,7 +101,8 @@ function startEditor(parsedPlist, zipFile) {
   document.getElementById('bundle-version').value = bundleVersion;
   document.getElementById('short-version-string').value = shortVersionString;
   document.getElementById('min-ios-version').value = minIOSVersion;
-  if (SupportsDocumentBrowser && FileSharingEnabled) {
+  console.log("FileSharingEnabled", FileSharingEnabled)
+  if ( FileSharingEnabled) {
     document.getElementById('file-access').checked = true;
   }
 
