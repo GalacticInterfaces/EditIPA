@@ -95,6 +95,7 @@ function startEditor(parsedPlist, zipFile) {
   const minIOSVersion = parsedPlist['MinimumOSVersion'] || '';
   const SupportsDocumentBrowser = parsedPlist['UISupportsDocumentBrowser'] || false
   const FileSharingEnabled = parsedPlist['UIFileSharingEnabled'] || false
+  const SupportsOpeningDocumentsInPlace = parsedPlist['LSSupportsOpeningDocumentsInPlace'] || false
   document.getElementById('bundle-identifier').value = bundleIdentifier;
   document.getElementById('bundle-name').value = bundleName;
   document.getElementById('display-name').value = displayName;
@@ -102,7 +103,9 @@ function startEditor(parsedPlist, zipFile) {
   document.getElementById('short-version-string').value = shortVersionString;
   document.getElementById('min-ios-version').value = minIOSVersion;
   console.log("FileSharingEnabled", FileSharingEnabled)
-  if ( FileSharingEnabled) {
+  console.log("LSSupportsOpeningDocumentsInPlace",SupportsOpeningDocumentsInPlace)
+  console.log("UISupportsDocumentBrowser",SupportsDocumentBrowser)
+  if ( (FileSharingEnabled && SupportsOpeningDocumentsInPlace) || SupportsDocumentBrowser) {
     document.getElementById('file-access').checked = true;
   }
 
@@ -176,15 +179,17 @@ document.addEventListener("submit", (event) => {
       editLoader.classList.remove('hidden')
       statusText.classList.remove('hidden')
       statusText.textContent = "Building Plist"
-      const isSupportDocumentBrowserEnabled = document.getElementById('file-access').checked;
+      const SupportsFilesApp = document.getElementById('file-access').checked;
       parsedPlistGlobal['CFBundleIdentifier'] = document.getElementById('bundle-identifier').value;
       parsedPlistGlobal['CFBundleName'] = document.getElementById('bundle-name').value;
       parsedPlistGlobal['CFBundleDisplayName'] = document.getElementById('display-name').value;
       parsedPlistGlobal['CFBundleVersion'] = document.getElementById('bundle-version').value;
       parsedPlistGlobal['CFBundleShortVersionString'] = document.getElementById('short-version-string').value;
       parsedPlistGlobal['MinimumOSVersion'] = document.getElementById('min-ios-version').value;
-      parsedPlistGlobal['UISupportsDocumentBrowser'] = isSupportDocumentBrowserEnabled;
-      parsedPlistGlobal['UIFileSharingEnabled'] = isSupportDocumentBrowserEnabled;
+      
+      parsedPlistGlobal['LSSupportsOpeningDocumentsInPlace'] = SupportsFilesApp;
+      parsedPlistGlobal['UISupportsDocumentBrowser'] = SupportsFilesApp;
+      parsedPlistGlobal['UIFileSharingEnabled'] = SupportsFilesApp;
 
       const serializedPlist = Plist.serialize(parsedPlistGlobal)
       const payloadFolder = Object.keys(zipFileGlobal.files).find(fileName => fileName.startsWith('Payload/') && fileName.endsWith('.app/Info.plist'));
