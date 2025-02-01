@@ -23,7 +23,7 @@
 - A somewhat modern web browser with JavaScript enabled.
 
 ### Usage
-1. Visit the [EditIPA website](https://legendary0001.github.io/EditIPA).
+1. Visit the [EditIPA website](https://JagritThukral.github.io/EditIPA).
 2. **Upload IPA**: Click the "Upload IPA" button and select your IPA file.
 3. **Edit Properties**: Once the IPA is uploaded, use the form to edit  properties in Basic Mode
 
