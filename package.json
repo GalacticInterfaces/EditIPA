@@ -7,7 +7,7 @@
     "build": "webpack",
     "start": "webpack serve  --allowed-hosts all --static ./"
   },
-  "author": "legendary0001",
+  "author": "JagritThukral",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.24.7",
