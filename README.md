@@ -3,6 +3,8 @@
 ## Overview
 **EditIPA** is a simple web-based tool designed to help you edit iOS application packages (IPAs) directly in your browser. You can change various properties such as the app name, icon, version, identifier, and more.
 
+**What are IPAs?**
+IPA are application packages for ios apps just like android has apk as their application package.you can sideload (install) IPAs via sidestore, altstore, scarlet etc
 ## Features
 - **Basic Mode**:
   - **Edit Name**: Change the display name of the app (CFBundleDisplayName).
