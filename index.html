@@ -48,6 +48,10 @@
             <image id="app-icon" width="100px" height="100px" src="" />
           </div>
           <div class="form-group">
+  <label for="icon-upload">App Icon (PNG)</label>
+  <input type="file" id="icon-upload" class="form-control" accept="image/png" onchange="previewAppIcon(event)" />
+</div>
+          <div class="form-group">
             <label for="display-name">Display Name (CFBundleDisplayName)</label>
             <input type="text" id="display-name" class="form-control" oninvalid="this.setCustomValidity('This field is required.')" oninput="this.setCustomValidity('')" />
           </div>
